@@ -18,10 +18,11 @@ router.post('/login', async (req, res) => {
             return res.status(404).json({message : "password is incorrect"})
         }
 
-        const token = jwt.sign({id: rows[0].id}, process.env.JWT_KEY, {expiresIn: '3h'})
+        const token = jwt.sign({id: rows[0].account_id}, process.env.JWT_KEY, {expiresIn: '3h'})
 
-        return res.status(201).json({token: token})
+        return res.status(200).json({token: token})
     } catch(err) {
+        console.error(err)
         return res.status(500).json(err.message)
     }
 })

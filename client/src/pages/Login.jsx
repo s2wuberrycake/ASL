@@ -19,8 +19,8 @@ const Login = () => {
         e.preventDefault()
         try{
             const response = await axios.post('http://localhost:3000/auth/', values)
-            if(response.status === 201) {
-                navigate('/')
+            if(response.status === 200) {
+                navigate('/dashboard')
             }
         } catch(err) {
             console.log(err)
@@ -37,13 +37,13 @@ const Login = () => {
                 <form onSubmit={handleSubmit}>
                     <label className="fieldset-label">Username</label>
                     <input type="text" className="input" placeholder="username"
-                    name="username" onChange={handleChanges} value={values.username} />
+                    name="username" onChange={handleChanges}/>
                     
                     <label className="fieldset-label">Password</label>
                     <input type="password" className="input" placeholder="Password"
-                    name="password" onChange={handleChanges} value={values.password}/>
+                    name="password" onChange={handleChanges}/>
                     
-                    <button className="btn btn-neutral mt-4" type="submit">Login</button>
+                    <button className="btn btn-neutral mt-4">Login</button>
                 </form>
                 </div>
             </div>
