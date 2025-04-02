@@ -17,21 +17,12 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
-            const response = await axios.post('http://localhost:3000/auth/login', values)
+            const response = await axios.post('http://localhost:3000/auth/Login', values)
             if(response.status === 200) {
-                localStorage.setItem('token', response.data.token)
-                navigate('/')
+                navigate('/dashboard')
             }
-        } catch (err) {
-            if (err.response) {
-                if (err.response.status === 404) {
-                    alert("User does not exist"); // Show an error message
-                } else if (err.response.status === 401) {
-                    alert("Password is incorrect");
-                }
-            } else {
-                console.error("Error:", err);
-            }
+        } catch(err) {
+            console.log(err)
         }
     }
 
@@ -41,7 +32,7 @@ const Login = () => {
             <div className="grid grid-cols-2 gap-4">
                 <div className="..."></div>
                 <div className="...">
-                    <legend className="fieldset-legend">LOG IN</legend>
+                    <legend className="fieldset-legend">Login</legend>
                 <form onSubmit={handleSubmit}>
                     <label className="fieldset-label">Username</label>
                     <input type="text" className="input" placeholder="username"

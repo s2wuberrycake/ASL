@@ -9,21 +9,21 @@ router.post('/login', async (req, res) => {
     const {username, password} = req.body;
     try {
         const db = await connectToDatabase()
-        const [rows] = await db.query('SELECT * FROM accounts WHERE acc_username = ?', [username])
+        const [rows] = await db.query('SELECT * FROM accounts WHERE username = ?', [username])
         if(rows.length === 0) {
             return res.status(404).json({message : "user does not exist"})
         }
-        const isMatch = await bcrypt.compare(password, rows[0].acc_password)
+        const isMatch = await bcrypt.compare(password, rows[0].password)
         if(!isMatch){
-            return res.status(401).json({message : "Incorrect password"})
+            return res.status(404).json({message : "password is incorrect"})
         }
 
-        const token = jwt.sign({id: rows[0].acc_id}, process.env.JWT_KEY, {expiresIn: '48h'})
+        const token = jwt.sign({id: rows[0].account_id}, process.env.JWT_KEY, {expiresIn: '3h'})
 
         return res.status(200).json({token: token})
     } catch(err) {
         console.error(err)
-        return res.status(500).json({ message: "Internal Server Error", error: err.message })
+        return res.status(500).json(err.message)
     }
 })
 
