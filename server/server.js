@@ -1,8 +1,6 @@
 import express from 'express'
-import mysql from 'mysql2'
 import cors from 'cors'
 import authRouter from './routes/authRoutes.js'
-import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 
 dotenv.config()

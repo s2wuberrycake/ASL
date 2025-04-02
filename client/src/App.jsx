@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Login from './pages/Login'
-import Dashboard from './pages/Dashboard'
+import Home from './pages/Home'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Dashboard />}></Route>
+        <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
       </Routes>
     </BrowserRouter>

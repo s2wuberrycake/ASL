@@ -1,6 +1,6 @@
 import bgImage from '../assets/login-bg.png'
 import axios from 'axios'
-import {useState, React} from 'react'
+import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 const Login = () => {
@@ -17,12 +17,21 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
-            const response = await axios.post('http://localhost:3000/auth/Login', values)
-            if(response.status === 200) {
-                navigate('/dashboard')
+            const response = await axios.post('http://localhost:3000/auth/login', values)
+            if(response.status === 201) {
+                localStorage.setItem('token', response.data.token)
+                navigate('/')
             }
-        } catch(err) {
-            console.log(err)
+        } catch (err) {
+            if (err.response) {
+                if (err.response.status === 404) {
+                    alert("User does not exist"); // Show an error message
+                } else if (err.response.status === 401) {
+                    alert("Password is incorrect");
+                }
+            } else {
+                console.error("Error:", err);
+            }
         }
     }
 
@@ -32,7 +41,7 @@ const Login = () => {
             <div className="grid grid-cols-2 gap-4">
                 <div className="..."></div>
                 <div className="...">
-                    <legend className="fieldset-legend">Login</legend>
+                    <legend className="fieldset-legend">LOG IN</legend>
                 <form onSubmit={handleSubmit}>
                     <label className="fieldset-label">Username</label>
                     <input type="text" className="input" placeholder="username"
@@ -42,7 +51,7 @@ const Login = () => {
                     <input type="password" className="input" placeholder="Password"
                     name="password" onChange={handleChanges}/>
                     
-                    <button className="btn btn-neutral mt-4">Login</button>
+                    <button className="btn btn-primary mt-4">Login</button>
                 </form>
                 </div>
             </div>

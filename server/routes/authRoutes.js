@@ -20,10 +20,38 @@ router.post('/login', async (req, res) => {
 
         const token = jwt.sign({id: rows[0].acc_id}, process.env.JWT_KEY, {expiresIn: '48h'})
 
-        return res.status(200).json({token: token})
+        return res.status(201).json({token: token})
     } catch(err) {
         console.error(err)
-        return res.status(500).json({ message: "Internal Server Error", error: err.message })
+        return res.status(500).json({ message: "internal server error", error: err.message })
+    }
+})
+
+const verifyToken = async (req, res, next) => {
+    try {
+        const token = req.headers['authorization'].split(' ')[1];
+        if(!token) {
+            return res.status(403).json({message: "no token provided"})
+        }
+        const decoded = jwt.verify(token, process.env.JWT_KEY)
+        req.userId = decoded.id;
+        next()
+    }   catch(err) {
+        return res.status(500).json({message: "server error"})
+    }
+}
+
+router.get('/home', verifyToken, async (req, res) => {
+    try {
+        const db = await connectToDatabase()
+        const [rows] = await db.query('SELECT * FROM accounts WHERE acc_id = ?', [req.userId])
+        if(rows.length === 0) {
+            return res.status(404).json({message : "user does not exist"})
+        }
+
+        return res.status(201).json({user: rows[0]})
+    }   catch(err) {
+        return res.status(500).json({message: " server error"})
     }
 })
 
