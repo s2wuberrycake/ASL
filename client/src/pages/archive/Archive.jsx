@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Footer = () => {
+const Archive = () => {
   return (
     <div>
-        Footer j
+        Archive
     </div>
   )
 }
 
-export default Footer
+export default Archive

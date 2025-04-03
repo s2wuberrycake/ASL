@@ -6,7 +6,10 @@ import Dashboard from './pages/dashboard/Dashboard'
 import Profile from './pages/profile/Profile'
 import Members from './pages/members/Members'
 import Updates from './pages/updates/Updates'
-import Test from './pages/Test'
+import Visits from './pages/visits/Visits'
+import Archive from './pages/archive/Archive'
+import Accounts from './pages/accounts/Accounts'
+import Backup from './pages/backup/backup'
 
 function App() {
   return (
@@ -18,10 +21,13 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="members" element={<Members />} />
           <Route path="updates" element={<Updates />} />
+          <Route path="visits" element={<Visits />} />
+          <Route path="archive" element={<Archive />} />
+          <Route path="accounts" element={<Accounts />} />
+          <Route path="backup" element={<Backup />} />
         </Route>
 
         <Route path="/login" element={<Login />} />
-        <Route path="/test" element={<Test />} /> {/* Testing page */}
       </Routes>
     </BrowserRouter>
   )
