@@ -3,7 +3,7 @@
 
 import React from 'react'
 import Sidebar from '../components/sidebar/sidebar'
-import Dashboard from '../components/dashboard/dashboard'
+import Dashboard from './dashboard/Dashboard'
 
 const Test = () => {
 	return (

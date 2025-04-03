@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import logoImage from '../assets/logo.png'
-import bgImage from '../assets/login-bg.png'
+import bgImage from '../../assets/login-bg.png'
 
 const Login = () => {
 	const [values, setValues] = useState({ username: '', password: '' })

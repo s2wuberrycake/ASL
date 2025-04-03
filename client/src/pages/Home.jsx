@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Sidebar from '../components/sidebar/sidebar'
-import Dashboard from '../components/dashboard/dashboard'
+import Dashboard from './dashboard/Dashboard'
 
 const Home = () => {
 	const navigate = useNavigate()
