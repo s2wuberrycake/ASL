@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate , Outlet} from 'react-router-dom'
 import axios from 'axios'
 import Sidebar from '../components/sidebar/sidebar'
-import Dashboard from './dashboard/Dashboard'
+import Footer from '../components/footer/Footer'
+import Menu from '../components/menu/Menu'
 
 const Home = () => {
 	const navigate = useNavigate()
@@ -31,7 +32,15 @@ const Home = () => {
 	return (
 		<main className='grid grid-cols-[220px_1fr] gap-4 p-4'>
 			<Sidebar />
-			<Dashboard />
+        <div>
+          <div>
+            <Menu />
+          </div>
+          <div>
+            <Outlet />
+          </div>
+        </div>
+      <Footer />
 		</main>
 	)
 }
