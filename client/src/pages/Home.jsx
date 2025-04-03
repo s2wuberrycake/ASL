@@ -12,15 +12,15 @@ const Home = () => {
 			const token = localStorage.getItem('token')
 			const response = await axios.get('http://localhost:3000/auth/home', {
 				headers: {
-					"Authorization" : `Bearer ${token}`
+					'Authorization': `Bearer ${token}`
 				}
 			})			
-			if(response.status !== 201) {
+			if (response.status !== 201) {
 				navigate('/login')
 			}
-		} catch(err) {
+		} catch (err) {
 			navigate('/login')
-			console.log(err)
+			console.error(err)
 		}
 	}
 
@@ -29,7 +29,7 @@ const Home = () => {
 	}, [])
 
 	return (
-		<main className="grid grid-cols-[220px_1fr] gap-4 p-4">
+		<main className='grid grid-cols-[220px_1fr] gap-4 p-4'>
 			<Sidebar />
 			<Dashboard />
 		</main>
