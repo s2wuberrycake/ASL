@@ -54,6 +54,10 @@ const Login = () => {
         }, 3000)
     }
 
+
+    {/*TODO reverse function like "const fetchUser" from Home page that will verify if user already has token
+        if token then direct user to Home. if !token then proceed to Login */}
+        
     return (
         <div className="bg-no-repeat bg-cover bg-center relative min-h-screen" style={{ backgroundImage: `url(${bgImage})` }}>
             <div className="absolute bg-gradient-to-b from-primary to-secondary opacity-90 inset-0 z-0"></div>
@@ -73,28 +77,27 @@ const Login = () => {
                         </div>
 
                         {/* Show error message if it exists */}
-                            {showAlert && (
-                                <div
-                                    className={`fixed top-0 left-1/2 transform -translate-x-1/2 mt-5 alert alert-error shadow-lg w-96 z-50 transition-all transform ${
-                                        alertExit ? 'animate-fade-out' : 'animate-pop-up'
+                        {showAlert && (
+                            <div
+                                className={`fixed top-0 left-1/2 transform -translate-x-1/2 mt-5 alert alert-error shadow-lg w-96 z-50 transition-all transform ${alertExit ? 'animate-fade-out' : 'animate-pop-up'
                                     }`}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    className="stroke-error h-6 w-6 shrink-0"
                                 >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        className="stroke-error h-6 w-6 shrink-0"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    <span className="alert-text">{errorMessage}</span>
-                                </div>
-                            )}
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
+                                <span className="alert-text">{errorMessage}</span>
+                            </div>
+                        )}
 
 
                         <form onSubmit={handleSubmit}>
@@ -104,7 +107,7 @@ const Login = () => {
                                     <input
                                         className="input input-bordered w-full"
                                         type="text"
-                                        placeholder=""
+                                        placeholder="admin"
                                         name="username"
                                         onChange={handleChanges}
                                     />
@@ -114,7 +117,7 @@ const Login = () => {
                                     <input
                                         className="input input-bordered w-full"
                                         type="password"
-                                        placeholder=""
+                                        placeholder="*****"
                                         name="password"
                                         onChange={handleChanges}
                                     />
@@ -128,7 +131,7 @@ const Login = () => {
                                     <button
                                         type="submit"
                                         className="btn btn-primary w-full">
-                                        Sign in
+                                        {'>>>'}
                                     </button>
                                 </div>
                             </div>
