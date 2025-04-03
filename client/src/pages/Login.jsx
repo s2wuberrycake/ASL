@@ -80,7 +80,7 @@ const Login = () => {
                         {showAlert && (
                             <div
                                 className={`fixed top-0 left-1/2 transform -translate-x-1/2 mt-5 alert alert-error
-                                    shadow-lg w-96 z-50 transition-all transform ${alertExit ? 'animate-fade-out' : 'animate-pop-up'}`}>
+                                    shadow-lg w-96 z-50 transition-all ${alertExit ? 'animate-fade-out' : 'animate-pop-up'}`}>
                                 <span className="alert-text">{errorMessage}</span>
                             </div>
                         )}
