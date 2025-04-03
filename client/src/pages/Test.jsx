@@ -1,5 +1,5 @@
-{/* NOTE: THIS PAGE IS FOR TESTING PURPOSES ONLY
-    DONT LINK TO THE ACTUAL FUNCTIONS */}
+// NOTE: THIS PAGE IS FOR TESTING PURPOSES ONLY
+// DONT LINK TO THE ACTUAL FUNCTIONS
 
 import React from 'react'
 import Sidebar from '../components/sidebar/sidebar'

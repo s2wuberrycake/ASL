@@ -9,9 +9,9 @@ const Login = () => {
         username: '',
         password: ''
     })
-    const [errorMessage, setErrorMessage] = useState('') // State for error message
-    const [showAlert, setShowAlert] = useState(false) // State to control alert visibility
-    const [alertExit, setAlertExit] = useState(false) // State to control alert exit animation
+    const [errorMessage, setErrorMessage] = useState('')
+    const [showAlert, setShowAlert] = useState(false)
+    const [alertExit, setAlertExit] = useState(false)
     const navigate = useNavigate()
 
     const handleChanges = (e) => {
@@ -43,21 +43,22 @@ const Login = () => {
         }
     }
 
-    // Trigger fade-out effect after 3 seconds
+    // Fade out animation for alert (default: 3 seconds)
     const triggerAlertExit = () => {
         setTimeout(() => {
             setAlertExit(true)
             setTimeout(() => {
                 setShowAlert(false)
-                setAlertExit(false) // Reset fade-out state
-            }, 500) // Wait for fade-out animation to complete before hiding the alert
+                setAlertExit(false)
+            }, 500)
         }, 3000)
     }
 
 
-    {/*TODO reverse function like "const fetchUser" from Home page that will verify if user already has token
-        if token then direct user to Home. if !token then proceed to Login */}
-        
+    // TODO reverse function like "const fetchUser"from Home page
+    // Will verify if user already has token
+    // If token then direct user to Home. if !token then proceed to Login
+
     return (
         <div className="bg-no-repeat bg-cover bg-center relative min-h-screen" style={{ backgroundImage: `url(${bgImage})` }}>
             <div className="absolute bg-gradient-to-b from-primary to-secondary opacity-90 inset-0 z-0"></div>
@@ -76,29 +77,13 @@ const Login = () => {
                             <h3 className="font-semibold text-2xl text-base-content">Sign In</h3>
                         </div>
 
-                        {/* Show error message if it exists */}
                         {showAlert && (
                             <div
-                                className={`fixed top-0 left-1/2 transform -translate-x-1/2 mt-5 alert alert-error shadow-lg w-96 z-50 transition-all transform ${alertExit ? 'animate-fade-out' : 'animate-pop-up'
-                                    }`}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    className="stroke-error h-6 w-6 shrink-0"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                </svg>
+                                className={`fixed top-0 left-1/2 transform -translate-x-1/2 mt-5 alert alert-error
+                                    shadow-lg w-96 z-50 transition-all transform ${alertExit ? 'animate-fade-out' : 'animate-pop-up'}`}>
                                 <span className="alert-text">{errorMessage}</span>
                             </div>
                         )}
-
 
                         <form onSubmit={handleSubmit}>
                             <div className="space-y-5">
