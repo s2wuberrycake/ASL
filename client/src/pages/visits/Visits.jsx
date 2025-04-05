@@ -1,11 +1,11 @@
 import React from 'react'
 
 const Visits = () => {
-  return (
-    <div>
-        Visits
-    </div>
-  )
+	return (
+		<div>
+			Visits
+		</div>
+	)
 }
 
 export default Visits

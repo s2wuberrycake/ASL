@@ -1,59 +1,57 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { Toaster, toast } from 'sonner'
 import bgImage from '../../assets/login-bg.png'
 
 const Login = () => {
 	const [values, setValues] = useState({ username: '', password: '' })
-	const [errorMessage, setErrorMessage] = useState('')
-	const [showAlert, setShowAlert] = useState(false)
-	const [alertExit, setAlertExit] = useState(false)
 	const navigate = useNavigate()
+
+	useEffect(() => {
+		const checkAuth = async () => {
+			const token = localStorage.getItem('token')
+			if (token) {
+				try {
+					const response = await axios.get('http://localhost:3000/auth/home', {
+						headers: { Authorization: `Bearer ${token}` }
+					})
+					if (response.status === 201) {
+						navigate('/')
+					}
+				} catch (err) {
+					console.log('Token check failed:', err)
+				}
+			}
+		}
+
+		checkAuth()
+	}, [navigate])
 
 	const handleChanges = (e) => {
 		setValues({ ...values, [e.target.name]: e.target.value })
 	}
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:3000/auth/login', values);
-            if (response.status === 201) {
-                localStorage.setItem('token', response.data.token);
-                navigate('/');
-            }
-        } catch (err) {
-            if (err.response) {
-                if (err.response.status === 404) {
-                    showError('User does not exist');
-                } else if (err.response.status === 401) {
-                    showError('Password is incorrect');
-                }
-            } else {
-                console.error('Error:', err);
-            }
-        }
-    };
-    
-    // Function to handle alert state updates with restart logic
-    const showError = (message) => {
-        setShowAlert(false); // Hide the existing alert instantly
-        setTimeout(() => {
-            setErrorMessage(message);
-            setShowAlert(true);
-            triggerAlertExit();
-        }, 50); // Small delay to restart animation
-    };
-    
-	// Fade out alert after 3 seconds
-	const triggerAlertExit = () => {
-		setTimeout(() => {
-			setAlertExit(true)
-			setTimeout(() => {
-				setShowAlert(false)
-				setAlertExit(false)
-			}, 500)
-		}, 3000)
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		try {
+			const response = await axios.post('http://localhost:3000/auth/login', values)
+			if (response.status === 201) {
+				localStorage.setItem('token', response.data.token)
+				navigate('/')
+			}
+		} catch (err) {
+			if (err.response) {
+				if (err.response.status === 404) {
+					toast.error('User does not exist')
+				} else if (err.response.status === 401) {
+					toast.error('Password is incorrect')
+				}
+			} else {
+				console.error('Error:', err)
+				toast.error('An unexpected error occurred')
+			}
+		}
 	}
 
 	return (
@@ -61,7 +59,8 @@ const Login = () => {
 			className="bg-no-repeat bg-cover bg-center relative min-h-screen"
 			style={{ backgroundImage: `url(${bgImage})` }}
 		>
-			<div className="absolute bg-gradient-to-b from-primary to-secondary opacity-90 inset-0 z-0"></div>
+			<Toaster />
+			<div className="absolute bg-accent opacity-96 inset-0 z-0"></div>
 			<div className="sm:flex sm:flex-row justify-center mx-0 min-h-screen">
 				<div className="flex-col flex self-center p-10 sm:max-w-5xl xl:max-w-2xl z-10">
 					<div className="self-start hidden lg:flex flex-col text-white">
@@ -72,15 +71,6 @@ const Login = () => {
 				<div className="flex justify-center self-center z-10">
 					<div className="p-12 bg-base-100 mx-auto rounded-2xl w-100 shadow-lg">
 						<h3 className="mb-4 font-semibold text-2xl text-base-content">Sign In</h3>
-
-                        {showAlert && (
-                            <div
-                                className={`fixed top-0 left-1/2 transform -translate-x-1/2 mt-5 alert alert-error
-                                shadow-lg w-96 z-50 transition-all ${alertExit ? 'animate-slide-up' : 'animate-slide-down'}`}
-                            >
-                                <span className="alert-text">{errorMessage}</span>
-                            </div>
-                        )}
 
 						<form onSubmit={handleSubmit} className="space-y-5">
 							<div className="space-y-2">
