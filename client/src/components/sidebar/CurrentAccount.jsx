@@ -1,15 +1,20 @@
 import React from 'react'
+import placeholder from '../../assets/placeholder.png' // Adjust path based on file location
 
 const CurrentAccount = () => {
 	return (
-		<div className="border-b border-stone-300 mb-4 mt-2 pb-4">
-			<div className="card card-md grid w-full items-center gap-2 p-0.5 bg-zinc-900 text-accent-content">
-				<div className="card-body text-center items-center">
-					<h2 className="card-title">Admin</h2>
-				</div>
-			</div>
-		</div>
+		<div className='card card-border border-base-300 card-sm flex flex-col items-center justify-center p- gap-2'>
+  <figure>
+  <img src={placeholder} alt="Account Avatar" />
+  </figure>
+  <div className="card-body">
+    <h2 className="card-title">Username</h2>
+    <p>Superadmin account. All administrative priveleges is unlocked</p>
+  </div>
+</div>
+		
 	)
 }
 
 export default CurrentAccount
+

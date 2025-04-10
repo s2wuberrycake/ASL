@@ -73,3 +73,25 @@
 .alert-text {
 	font-family: "Consolas", monospace;
 }
+
+/* Sidebar scroll behavior */
+.sidebar-scrollable {
+  max-height: calc(100vh - 80px); /* Adjust for the top and bottom margin/padding */
+  overflow-y: auto; /* Always allow scrolling */
+}
+
+/* Hide scrollbar on hover but keep scroll functionality */
+.sidebar-scrollable:hover {
+  overflow-y: scroll; /* Enable scrolling on hover */
+}
+
+/* Hide scrollbar */
+.sidebar-scrollable::-webkit-scrollbar {
+  display: none; /* Hides scrollbar for webkit-based browsers (Chrome, Safari, Edge) */
+}
+
+/* Firefox-specific way to hide scrollbar */
+.sidebar-scrollable {
+  scrollbar-width: none; /* Hides the scrollbar in Firefox */
+}
+

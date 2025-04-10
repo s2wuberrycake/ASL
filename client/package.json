@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@flaticon/flaticon-uicons": "^3.3.1",
     "@tailwindcss/vite": "^4.0.17",
+    "@tanstack/react-table": "^8.21.2",
     "axios": "^1.8.4",
     "daisyui": "^5.0.9",
     "react": "^19.0.0",
