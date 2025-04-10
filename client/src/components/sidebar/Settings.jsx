@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const Settings = () => {
@@ -24,7 +24,7 @@ const Settings = () => {
     }
 
     localStorage.removeItem('token')
-    navigate('/login')
+    navigate('/')
   }
 
   return (
@@ -33,17 +33,17 @@ const Settings = () => {
         <li className="menu-title">Settings</li>
 
         <li>
-          <a href="/accounts">
+          <Link to="/accounts">
             <i className="fi fi-rr-user-lock text-base opacity-70"></i>
             Accounts
-          </a>
+          </Link>
         </li>
 
         <li>
-          <a href="/backup">
+          <Link to="/backup">
             <i className="fi fi-rr-back-up text-base opacity-70"></i>
             Backup
-          </a>
+          </Link>
         </li>
 
         <li
